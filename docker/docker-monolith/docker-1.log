@@ -1,0 +1,4 @@
+REPOSITORY             TAG       IMAGE ID       CREATED         SIZE
+lite/ubuntu-tmp-file   latest    61c9e59c87b8   2 minutes ago   63.1MB
+ubuntu                 18.04     5a214d77f5d7   4 weeks ago     63.1MB
+hello-world            latest    feb5d9fea6a5   5 weeks ago     13.3kB
