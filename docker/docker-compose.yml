@@ -6,25 +6,44 @@ services:
       - post_db:/data/db
     networks:
       - back_net
+
   ui:
     #build: ./ui
     image: ${USERNAME}/ui:${ui_tag}
     ports:
-      - ${ui_host_port}:${ui_docker_port}
+      - 9292:9292
     networks:
       - front_net
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.ui
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+
   post:
     #build: ./post-py
     image: ${USERNAME}/post:${post_tag}
     networks:
       - front_net
       - back_net
+    logging:
+     driver: "fluentd"
+     options:
+       fluentd-address: localhost:24224
+       tag: service.post
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+
   comment:
     #build: ./comment
     image: ${USERNAME}/comment:${comment_tag}
     networks:
       - front_net
       - back_net
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
 
   prometheus:
     image: ${USERNAME}/prometheus
