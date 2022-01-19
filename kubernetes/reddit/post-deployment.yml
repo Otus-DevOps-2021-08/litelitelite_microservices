@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,14 +7,14 @@ metadata:
     app: reddit
     component: post
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: reddit
       component: post
   template:
     metadata:
-      name: post
+      name: comment
       labels:
         app: reddit
         component: post
@@ -21,3 +22,6 @@ spec:
       containers:
       - image: litelite/post:logging
         name: post
+        env:
+          - name: POST_DATABASE_HOST
+            value: post-db
