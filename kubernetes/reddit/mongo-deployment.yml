@@ -8,7 +8,6 @@ metadata:
     component: mongo
     post-db: "true"
     comment-db: "true"
-
 spec:
   replicas: 1
   selector:
